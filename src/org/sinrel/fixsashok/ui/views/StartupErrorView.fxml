@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="500.0" stylesheets="@../styles/StartupErrorStyle.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.sinrel.fixsashok.ui.controllers.StartupErrorController">
+   <bottom>
+      <AnchorPane prefHeight="50.0" prefWidth="500.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button id="close" fx:id="close" layoutX="406.0" layoutY="10.0" mnemonicParsing="false" onAction="#closeWindow" prefHeight="31.0" prefWidth="80.0" text="Закрыть" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="406.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="10.0" />
+         </children>
+      </AnchorPane>
+   </bottom>
+   <center>
+      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView id="startupErrorIcon" fx:id="errorIcon" fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/startupErrorIcon.png" />
+               </image>
+               <HBox.margin>
+                  <Insets left="20.0" top="20.0" />
+               </HBox.margin>
+            </ImageView>
+            <Label id="errorDescription" fx:id="errorDescription" text="Запуск второй копии лаунчера невозможен!">
+               <font>
+                  <Font name="Tahoma" size="16.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="20.0" top="25.0" />
+               </HBox.margin>
+            </Label>
+         </children>
+      </HBox>
+   </center>
+</BorderPane>

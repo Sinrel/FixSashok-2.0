@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.web.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<Pane id="mainSceneRoot" fx:id="mainSceneRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="850.0" stylesheets="@../styles/MainSceneStyle.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.sinrel.fixsashok.ui.controllers.MainSceneController">
+   <children>
+      <Button id="toGame" fx:id="toGame" layoutX="550.0" layoutY="436.0" mnemonicParsing="false" onAction="#toGame" prefHeight="40.0" prefWidth="140.0" text="%toGame.text" textAlignment="CENTER" textFill="RED">
+         <font>
+            <Font name="Tahoma" size="16.0" />
+         </font></Button>
+      <Pane id="dragger" fx:id="dragger" onMouseDragged="#onMouseDraggedEvent" onMousePressed="#onMousePressedEvent" prefHeight="30.0" prefWidth="850.0">
+         <children>
+            <Button id="closeButton" fx:id="closeButton" layoutX="810.0" layoutY="2.0" mnemonicParsing="false" onAction="#closeWindow" prefHeight="24.0" prefWidth="35.0" />
+            <Button id="hideButton" fx:id="hideButton" layoutX="770.0" layoutY="2.0" mnemonicParsing="false" onAction="#hideWindow" prefHeight="24.0" prefWidth="35.0" />
+            <Label id="windowTitle" fx:id="windowTitle" layoutX="10.0" layoutY="5.0" text="%window.title" textFill="WHITE">
+               <font>
+                  <Font name="Tahoma" size="16.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Button id="toOptions" fx:id="toOptions" layoutX="714.0" layoutY="436.0" mnemonicParsing="false" onAction="#toOptions" prefHeight="40.0" prefWidth="130.0" text="%toOptions.text" textAlignment="CENTER" textFill="YELLOW">
+         <font>
+            <Font name="Tahoma" size="16.0" />
+         </font>
+      </Button>
+      <Hyperlink id="firstLink" fx:id="firstLink" focusTraversable="false" layoutX="518.0" layoutY="408.0" onAction="#onFirstLinkAction" text="%firstLink.text" textFill="WHITE">
+         <font>
+            <Font name="Tahoma" size="16.0" />
+         </font>
+      </Hyperlink>
+      <TextField id="loginField" fx:id="loginField" focusTraversable="false" layoutX="10.0" layoutY="440.0" prefHeight="36.0" prefWidth="195.0" promptText="Логин...">
+         <font>
+            <Font name="Tahoma" size="16.0" />
+         </font>
+      </TextField>
+      <PasswordField id="passwordField" fx:id="passwordField" focusTraversable="false" layoutX="215.0" layoutY="440.0" prefHeight="36.0" prefWidth="195.0" promptText="Пароль...">
+         <font>
+            <Font name="Tahoma" size="16.0" />
+         </font>
+      </PasswordField>
+      <WebView id="newsBrowser" fx:id="newsBrowser" focusTraversable="false" layoutY="30.0" prefHeight="369.0" prefWidth="850.0">
+         <effect>
+            <Blend mode="LIGHTEN" />
+         </effect></WebView>
+      <Hyperlink id="secondLink" fx:id="secondLink" focusTraversable="false" layoutX="630.0" layoutY="408.0" onAction="#onSecondLinkAction" text="%secondLink.text" textFill="WHITE">
+         <font>
+            <Font name="Tahoma" size="16.0" />
+         </font>
+      </Hyperlink>
+      <Hyperlink id="firstLink" fx:id="thirdLink" focusTraversable="false" layoutX="779.0" layoutY="408.0" onAction="#onThirdLinkAction" text="%thirdLink.text" textFill="WHITE">
+         <font>
+            <Font name="Tahoma" size="16.0" />
+         </font>
+      </Hyperlink>
+      <CheckBox id="savePassword" fx:id="savePassword" layoutX="12.0" layoutY="486.0" mnemonicParsing="false" text="%savePassword.text" textFill="WHITE">
+         <font>
+            <Font name="Tahoma" size="16.0" />
+         </font>
+      </CheckBox>
+   </children>
+</Pane>

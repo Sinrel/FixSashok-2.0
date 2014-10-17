@@ -1,0 +1,7 @@
+#mainSceneRoot {
+	-fx-background-color: rgba(0, 100, 100, 0.5); 
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: center;
+	-fx-background-image: url("../images/backgroundDownload.png");
+
+}

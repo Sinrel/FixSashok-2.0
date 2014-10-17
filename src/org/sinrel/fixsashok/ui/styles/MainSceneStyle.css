@@ -1,0 +1,155 @@
+#mainSceneRoot {
+	-fx-background-color: transparent; 
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: center;
+	-fx-background-image: url("../images/background.png");
+}
+
+#dragger {}
+
+#savePassword>.box {
+  -fx-background-insets: 0;
+  -fx-background-radius: 0;
+  -fx-background-color: transparent;
+}
+
+#savePassword>.box>.mark {
+  -fx-background-image: url("../images/checkboxes/checkbox.png");
+  -fx-background-position: center;
+  -fx-background-repeat: stretch;
+}
+
+#savePassword:selected>.box>.mark{
+  -fx-background-color: transparent;
+  -fx-background-image: url("../images/checkboxes/checkboxTrue.png");
+}
+
+/*
+selected
+determinate
+indeterminate
+*/
+
+#loginField {
+	-fx-background-color: transparent;
+	-fx-background-repeat: no-repeat;
+	-fx-background-size: 100%;
+	-fx-background-position: center;
+	-fx-background-image: url("../images/loginField.png");
+}
+
+#passwordField {
+	-fx-background-color: transparent;
+	-fx-background-repeat: no-repeat;
+	-fx-background-size: 100%;
+	-fx-background-position: center;
+	-fx-background-image: url("../images/passwordField.png");
+}
+
+#closeButton {
+	-fx-background-color: transparent;
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: center;
+	-fx-background-size: 100%;
+	-fx-background-image: url("../images/draggbuttons/closeWindow.png");
+}
+
+#closeButton:hover {
+	-fx-background-size: 100%;
+	-fx-background-color: transparent;
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: center;
+	-fx-background-image: url("../images/draggbuttons/closeWindowHover.png");
+}
+
+#closeButton:active {
+	-fx-background-size: 100%;
+	-fx-background-color: transparent;
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: center;
+	-fx-background-image: url("../images/draggbuttons/closeWindowActive.png");
+}
+
+#hideButton {
+	-fx-background-size: 100%;
+	-fx-background-color: transparent;
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: center;
+	-fx-background-image: url("../images/draggbuttons/hideWindow.png");
+}
+
+#hideButton:hover {
+	-fx-background-size: 100%;
+	-fx-background-color: transparent;
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: center;
+	-fx-background-image: url("../images/draggbuttons/hideWindowHover.png");
+}
+
+#hideButton:active {
+	-fx-background-size: 100%;
+	-fx-background-color: transparent;
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: center;
+	-fx-background-image: url("../images/draggbuttons/hideWindowActive.png");
+}
+
+#firstLink:visited {
+	color: #fff;	
+}
+
+#firstLink:visited {
+	
+}
+
+#toGame {
+	-fx-background-position: center;
+	-fx-background-color: transparent;
+	-fx-background-repeat: no-repeat;
+	-fx-background-image: url("../images/buttons/button.png");
+	-fx-background-size: 100%;
+}
+
+#toGame:hover {
+	-fx-background-color: transparent;
+	-fx-background-position: center;
+	-fx-background-repeat: no-repeat;
+	-fx-background-image: url("../images/buttons/buttonHover.png");
+	-fx-background-size: 100%;
+}
+
+#toGame:active {
+	-fx-background-color: transparent;
+	-fx-background-position: center;
+	-fx-background-repeat: no-repeat;
+	-fx-background-image: url("../images/buttons/buttonPressed.png");
+	-fx-background-size: 100%;
+}
+
+#toOptions {
+	-fx-background-position: center;
+	-fx-background-color: transparent;
+	-fx-background-repeat: no-repeat;
+	-fx-background-image: url("../images/buttons/button.png");
+	-fx-background-size: 100%;
+}
+
+#toOptions:hover {
+	-fx-background-color: transparent;
+	-fx-background-position: center;
+	-fx-background-repeat: no-repeat;
+	-fx-background-image: url("../images/buttons/buttonHover.png");
+	-fx-background-size: 100%;
+}
+
+#toOptions:active {
+	-fx-background-color: transparent;
+	-fx-background-position: center;
+	-fx-background-repeat: no-repeat;
+	-fx-background-image: url("../images/buttons/buttonPressed.png");
+	-fx-background-size: 100%;
+}
+
+#newsBrowser {
+	fx-background-color: transparent;
+}
