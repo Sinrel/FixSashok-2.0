@@ -15,10 +15,9 @@ public class ComboboxStyle
 	public float fontSize = 1F;
 	public Color color;
 	public boolean visible = false;
-	public Align align;
 	public BufferedImage texture;
 	
-	public ComboboxStyle(int x, int y, int w, int h, String fontName, String texture, float fontSize, Color color, boolean visible, Align align)
+	public ComboboxStyle(int x, int y, int w, int h, String fontName, String texture, float fontSize, Color color, boolean visible)
 	{
 		this.x = x;
 		this.y = y;
@@ -28,7 +27,6 @@ public class ComboboxStyle
 		this.fontSize = fontSize;
 		this.color = color;
 		this.visible = visible;
-		this.align = align;
 		this.texture = BaseUtils.getLocalImage(texture);
 	}
 	

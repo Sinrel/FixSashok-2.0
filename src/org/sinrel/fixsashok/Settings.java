@@ -48,4 +48,9 @@ public class Settings {
 
 	public static boolean debug		 	         =  true; //Отображать все действия лаунчера (отладка)(true/false)
 	
+	public static String[] servers =
+	{
+		"Offline, localhost, 25565, 1.5.2",
+	};
+	
 }

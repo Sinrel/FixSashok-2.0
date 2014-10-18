@@ -30,7 +30,7 @@ public class Starter
 			}
 			params.add("-classpath");
 			params.add(jarpath);
-			params.add(Mainclass.class.getCanonicalName());
+			params.add(FixSashok.class.getCanonicalName());
 			
 			ProcessBuilder pb = new ProcessBuilder(params);
 			pb.directory(new File(BaseUtils.getAssetsDir().toString()));

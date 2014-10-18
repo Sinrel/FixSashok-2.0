@@ -1,11 +1,12 @@
 package org.sinrel.fixsashok;
 
-import java.io.IOException;
-
 import org.sinrel.fixsashok.localization.Translator;
 import org.sinrel.fixsashok.ui.audio.MusicUtils;
+import org.sinrel.fixsashok.ui.controllers.Controllers;
+import org.sinrel.fixsashok.ui.views.Scenes;
 
 import net.launcher.utils.BaseUtils;
+
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -17,15 +18,15 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import javafx.event.EventHandler;
+
 import static net.launcher.utils.BaseUtils.moveFaviconToAssetsPath;
 
 public class FixSashok extends Application {
 	
-	public Scene MAIN_SCENE, OPTIONS_SCENE, PROCESS_SCENE, DOWNLOAD_SCENE;
 	public Scene startupErrorScene;
 	
 	public Stage stage;
-	public Translator translator;
+	private Scenes scenes;
 	
 	private static FixSashok instance;
 	
@@ -42,9 +43,8 @@ public class FixSashok extends Application {
 	public void start( Stage stage ) {
 		this.stage = stage;
 		instance = this;
-		translator = new Translator();
 		
-		try{ 
+		try{
 			stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 			    @Override public void handle(WindowEvent t) {
 			        shutdown();
@@ -65,7 +65,7 @@ public class FixSashok extends Application {
 	        	stage.show();
 			}else{
 				moveFaviconToAssetsPath();
-				loadViews();
+				Scenes.getInstance();
 
 				stage.setTitle( Settings.title );
 				stage.initStyle(StageStyle.TRANSPARENT);
@@ -73,7 +73,7 @@ public class FixSashok extends Application {
 				
 				stage.setResizable(false);
 				stage.getIcons().add( new Image(getClass().getResourceAsStream("ui/images/favicon.png")) );
-				stage.setScene( MAIN_SCENE );
+				stage.setScene( Scenes.getInstance().getMainScene() );
 		
 				stage.show();
 				
@@ -88,7 +88,8 @@ public class FixSashok extends Application {
 			shutdown();
 		}
 	}
-		
+	
+	/*
 	private void loadViews() throws IOException {
 		//Loading views
 		MAIN_SCENE = new Scene( (Parent) FXMLLoader.load( getClass().getResource("ui/views/MainSceneView.fxml"), translator.getCurrentLang() ) );
@@ -103,7 +104,11 @@ public class FixSashok extends Application {
 		//
 		MAIN_SCENE.setFill( Color.TRANSPARENT );
 		OPTIONS_SCENE.setFill( Color.TRANSPARENT );
+		PROCESS_SCENE.setFill( Color.TRANSPARENT );
+		DOWNLOAD_SCENE.setFill( Color.TRANSPARENT );
+		//DIALOG_SCENE.setFill( Color.TRANSPARENT );
 	}
+	*/
 	
 	public void shutdown() {
 		if( Settings.playMusic ) MusicUtils.playShutdownSound();

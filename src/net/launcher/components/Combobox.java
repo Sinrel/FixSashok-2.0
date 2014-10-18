@@ -1,6 +1,5 @@
 package net.launcher.components;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
@@ -9,8 +8,6 @@ import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JComponent;
-
-import org.sinrel.fixsashok.Settings;
 
 import net.launcher.utils.BaseUtils;
 import static net.launcher.utils.ImageUtils.*;
@@ -97,11 +94,7 @@ public class Combobox extends JComponent implements MouseListener, MouseMotionLi
 			g.drawImage(genButton(w, defaultTX.getHeight(), defaultTX), 0, 0, w, defaultTX.getHeight(), null);
 			g.drawString(elements[selected], 5, rolloverTX.getHeight() - (g.getFontMetrics().getHeight() / 2));
 		}
-		if(Settings.drawTracers)
-		{
-			g.setColor(Color.GREEN);
-			g.drawRect(0, 0, getWidth() - 1, getHeight() - 1);
-		}
+
 		g.dispose();
 	}
 

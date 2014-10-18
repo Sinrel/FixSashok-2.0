@@ -1,11 +1,13 @@
 package org.sinrel.fixsashok.ui.controllers;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import net.launcher.utils.BaseUtils;
 
 import org.sinrel.fixsashok.FixSashok;
+import org.sinrel.fixsashok.ui.views.Scenes;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -61,7 +63,7 @@ public class OptionsSceneController implements Initializable {
 	}  
 	
 	@FXML
-	public void closeOptions( ActionEvent e ) {
+	public void closeOptions( ActionEvent e ) throws IOException {
 		if(!isNumeric( memoryField.getText() ) )
 		{
 			try
@@ -76,7 +78,7 @@ public class OptionsSceneController implements Initializable {
 		}
 		
 		FixSashok instance = FixSashok.getInstance();
-		instance.stage.setScene( instance.MAIN_SCENE );
+		instance.stage.setScene( Scenes.getInstance().getMainScene() );
 	}
 
 	@Override

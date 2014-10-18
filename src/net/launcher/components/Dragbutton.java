@@ -1,6 +1,5 @@
 package net.launcher.components;
 
-import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -9,8 +8,6 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.ButtonModel;
 import javax.swing.JButton;
-
-import org.sinrel.fixsashok.Settings;
 
 public class Dragbutton extends JButton
 {
@@ -43,11 +40,6 @@ public class Dragbutton extends JButton
 			}
 			else g.drawImage(img2, 0, 0, getWidth(), getHeight(), null);
 		} else g.drawImage(img1, 0, 0, getWidth(), getHeight(), null);
-		if(Settings.drawTracers)
-		{
-			g.setColor(Color.CYAN);
-			g.drawRect(0, 0, getWidth() - 1, getHeight() - 1);
-		}
 		g.dispose();
 		super.paintComponent(maing);
 	}

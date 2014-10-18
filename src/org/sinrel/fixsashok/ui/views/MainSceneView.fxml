@@ -67,5 +67,7 @@
             <Font name="Tahoma" size="16.0" />
          </font>
       </CheckBox>
+      <ChoiceBox id="servers" fx:id="servers" focusTraversable="false" layoutX="215.0" layoutY="480.0" prefHeight="24.0" prefWidth="195.0" />
+      <Label id="serverStatus" fx:id="serverStatus" layoutX="420.0" layoutY="485.0" />
    </children>
 </Pane>

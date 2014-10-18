@@ -12,10 +12,12 @@ import java.util.List;
 import net.y;
 import net.launcher.components.Frame;
 import net.launcher.components.PersonalContainer;
+import javafx.scene.control.TextField;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 
+import org.sinrel.fixsashok.FixSashok;
 import org.sinrel.fixsashok.Settings;
 
 public class ThreadUtils
@@ -28,7 +30,7 @@ public class ThreadUtils
 	
 	public static void auth(final boolean personal)
 	{
-		BaseUtils.send("Logging in, login: " + Frame.login.getText());
+		BaseUtils.send("Logging in, login: " + (TextField) FixSashok.getInstance().MAIN_SCENE.lookup("#loginField"));
 		Thread t = new Thread() {
 		public void run()
 		{ try {

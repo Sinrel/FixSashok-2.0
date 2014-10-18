@@ -2,7 +2,6 @@ package net.launcher.utils;
 
 import java.awt.Font;
 import java.awt.image.BufferedImage;
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -12,22 +11,17 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
 import java.net.HttpURLConnection;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.URI;
 import java.net.URL;
-import java.net.URLClassLoader;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 
 import javax.imageio.ImageIO;
 
@@ -35,7 +29,6 @@ import org.sinrel.fixsashok.FixSashok;
 import org.sinrel.fixsashok.Settings;
 import org.sinrel.fixsashok.Starter;
 
-import net.launcher.components.Files;
 import net.launcher.components.Frame;
 
 public class BaseUtils
@@ -346,36 +339,6 @@ public class BaseUtils
 		else file.delete();
 	}
 
-	public static BufferedImage getSkinImage(String name)
-	{
-		try
-		{
-			BufferedImage img = ImageIO.read(new URL(buildUrl(Settings.skins + name + ".png")));
-			send("Skin loaded: " + buildUrl(Settings.skins + name + ".png"));
-			return img;
-		}
-		catch(Exception e)
-		{
-			sendErr("Skin not found: " + buildUrl(Settings.skins + name + ".png"));
-			return getLocalImage("skin");
-		}
-	}
-
-	public static BufferedImage getCloakImage(String name)
-	{
-		try
-		{
-			BufferedImage img = ImageIO.read(new URL(buildUrl(Settings.cloaks + name + ".png")));
-			send("Cloak loaded: " + buildUrl(Settings.cloaks + name + ".png"));
-			return img;
-		}
-		catch(Exception e)
-		{
-			sendErr("Cloak not found: " + buildUrl(Settings.cloaks + name + ".png"));
-			return new BufferedImage(64, 32, 2);
-		}
-	}
-
 	public static String execute(String surl, Object[] params)
 	{
 		try
@@ -545,7 +508,8 @@ public class BaseUtils
 		}
 		return "Ошибка получения информации";
 	}
-
+	
+	/*
 	public static BufferedImage genServerIcon(String[] args)
 	{
 		if(args[0] == null && args[1] == null && args[2] == null) return Files.light.getSubimage(0, 0, Files.light.getHeight(), Files.light.getHeight());
@@ -556,6 +520,8 @@ public class BaseUtils
 		}
 		return Files.light.getSubimage(Files.light.getHeight() * 3, 0, Files.light.getHeight(), Files.light.getHeight());
 	}
+	
+	*/
 
 	public static void restart()
 	{

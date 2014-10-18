@@ -26,8 +26,8 @@ public class MusicUtils {
 	}
 	
 	private static void playAudioFile( String filename ) {
-		final URL resource = MusicUtils.class.getResource( filename );
-	    final Media media = new Media( resource.toString() );
+		final URL resource = MusicUtils.class.getResource( filename );		
+	    final Media media = new Media( resource.toString() );	    
 	    final MediaPlayer mediaPlayer = new MediaPlayer( media );
 	    mediaPlayer.volumeProperty().setValue( Settings.musicVolume );
 	    mediaPlayer.play();

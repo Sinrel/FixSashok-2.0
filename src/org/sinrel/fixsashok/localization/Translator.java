@@ -10,6 +10,8 @@ public class Translator {
 	
 	private ResourceBundle current;
 	
+	private static Translator instance;
+	
 	public Translator() {
 		current = ru;
 	}
@@ -24,6 +26,11 @@ public class Translator {
 		}else if ( locale.getLanguage().equals( new Locale("en").getLanguage() ) ) {
 				current = en;
 			}else current = ru;
+	}
+
+	public static Translator getInstance() {
+		if( instance == null ) instance = new Translator();
+		return instance;
 	}
 	
 }

@@ -6,8 +6,11 @@ import java.net.URI;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import net.launcher.utils.BaseUtils;
+
 import org.sinrel.fixsashok.FixSashok;
 import org.sinrel.fixsashok.Settings;
+import org.sinrel.fixsashok.ui.views.Scenes;
 
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
@@ -16,6 +19,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -35,7 +39,10 @@ public class MainSceneController implements Initializable {
 	private Pane mainSceneRoot, dragger;
 	
 	@FXML
-	private Label windowTitle;
+	private Label windowTitle, serverStatus;
+	
+	@FXML
+	private ChoiceBox<String> servers;
 	
 	@FXML
 	private Hyperlink firstLink, secondLink, thirdLink;
@@ -68,8 +75,7 @@ public class MainSceneController implements Initializable {
 	
 	@FXML
 	public void toOptions( ActionEvent e ) throws IOException {
-		FixSashok instance = FixSashok.getInstance();
-		instance.stage.setScene( instance.OPTIONS_SCENE );
+		FixSashok.getInstance().stage.setScene( Scenes.getInstance().getOptionsScene() );
 	}
 	
 	@FXML
@@ -129,6 +135,8 @@ public class MainSceneController implements Initializable {
 		if( isEmptyLink( Settings.firstLink ) ) children.remove( firstLink );
 		if( isEmptyLink( Settings.secondLink ) ) children.remove( secondLink );
 		if( isEmptyLink( Settings.thirdLink ) ) children.remove( thirdLink );
+		
+		servers.getItems().addAll( BaseUtils.getServerNames() );
 	}
 	
 	private boolean isEmptyLink( String link ) {
