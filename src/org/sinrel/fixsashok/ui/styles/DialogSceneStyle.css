@@ -1,0 +1,25 @@
+#root {
+	-fx-background-color: transparent;
+	-fx-background-position: center;
+	-fx-background-repeat: no-repeat;
+	-fx-background-image: url("../images/backgroundDialog.png");
+	-fx-background-size: 100%;
+}
+
+#dialogDescription {
+	 -fx-background-color: transparent;	
+	 -fx-text-fill: white;
+}
+
+#dialogDescription .scroll-pane {
+    -fx-background-color: transparent;
+}
+
+#dialogDescription .scroll-pane .viewport{
+    -fx-background-color: transparent;
+}
+
+
+#dialogDescription .scroll-pane .content{
+    -fx-background-color: transparent;
+}

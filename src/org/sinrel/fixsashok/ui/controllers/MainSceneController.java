@@ -10,8 +10,11 @@ import net.launcher.utils.BaseUtils;
 
 import org.sinrel.fixsashok.FixSashok;
 import org.sinrel.fixsashok.Settings;
+import org.sinrel.fixsashok.localization.Translator;
 import org.sinrel.fixsashok.ui.views.Scenes;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -24,11 +27,13 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class MainSceneController implements Initializable {
 	
@@ -39,7 +44,7 @@ public class MainSceneController implements Initializable {
 	private Pane mainSceneRoot, dragger;
 	
 	@FXML
-	private Label windowTitle, serverStatus;
+	private Label windowTitle, serverStatus, loadingDesc;
 	
 	@FXML
 	private ChoiceBox<String> servers;
@@ -56,7 +61,11 @@ public class MainSceneController implements Initializable {
 	@FXML
 	private WebView newsBrowser;
 	
+	@FXML
+	private ImageView loadingIcon;
+	
 	private double x,y;
+	private Pane scene;
 	
 	@FXML
 	public void closeWindow( ActionEvent e ) {
@@ -70,11 +79,13 @@ public class MainSceneController implements Initializable {
 	
 	@FXML
 	public void toGame( ActionEvent e ) {
-	
+		setLoading(	Translator.getInstance().getCurrentLang().getString("loading.auth"), 3000 );
+		//TODO
 	}
 	
 	@FXML
 	public void toOptions( ActionEvent e ) throws IOException {
+		Controllers.getInstance().getOptionsController().loadOptions();
 		FixSashok.getInstance().stage.setScene( Scenes.getInstance().getOptionsScene() );
 	}
 	
@@ -119,11 +130,14 @@ public class MainSceneController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		Pane scene = (Pane) newsBrowser.getParent();
+		scene = (Pane) newsBrowser.getParent();
 		ObservableList<Node> children = scene.getChildren();
 		
+		loadingDesc.setVisible(false);
+		loadingIcon.setVisible(false);
+		
 		if( Settings.newsLink == null || Settings.newsLink.equals( "" ) ) {
-			scene.getChildren().remove(newsBrowser);
+			children.remove(newsBrowser);
 		}else{
 			Platform.runLater( new Runnable() {
 				public void run() {
@@ -137,11 +151,35 @@ public class MainSceneController implements Initializable {
 		if( isEmptyLink( Settings.thirdLink ) ) children.remove( thirdLink );
 		
 		servers.getItems().addAll( BaseUtils.getServerNames() );
+		servers.getSelectionModel().select(0);
 	}
 	
 	private boolean isEmptyLink( String link ) {
 		if( link == null || link.equals("") ) return true;
 		return false;
+	}
+	
+	public void setLoading( String reason, int delay ) {
+		mainSceneRoot.setDisable(true);
+		
+		loadingDesc.setVisible(true);
+		loadingIcon.setVisible(true);
+		
+		loadingDesc.setText( reason );
+		double width = com.sun.javafx.tk.Toolkit.getToolkit().getFontLoader().computeStringWidth( loadingDesc.getText(), loadingDesc.getFont());
+		loadingDesc.setLayoutX( scene.getWidth() / 2 - ( width / 2 ) );
+		
+		new Timeline(new KeyFrame(
+		        Duration.millis(delay),
+		        ae -> cancelLoading()))
+		    .play();
+	}
+	
+	public void cancelLoading() {
+		loadingDesc.setVisible(false);
+		loadingIcon.setVisible(false);
+		
+		mainSceneRoot.setDisable(false);
 	}
 		
 }

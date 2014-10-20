@@ -58,13 +58,9 @@ public class OptionsSceneController implements Initializable {
 		FixSashok.getInstance().stage.setIconified(true);
 	}
 	
-	private boolean isNumeric(String s) {  
-	    return s.matches("[-+]?\\d*\\.?\\d+");  
-	}  
-	
 	@FXML
 	public void closeOptions( ActionEvent e ) throws IOException {
-		if(!isNumeric( memoryField.getText() ) )
+		if(!BaseUtils.isNumeric( memoryField.getText() ) )
 		{
 			try
 			{
@@ -87,6 +83,11 @@ public class OptionsSceneController implements Initializable {
 	}
 	
 	public void loadOptions() {
+		String memory = BaseUtils.getPropertyString("memory");
+		memoryField.setText( memory == null ? "1024": memory );
 		
+		fullscreen.setSelected( BaseUtils.getPropertyBoolean( "fullscreen" ) );
+		loadNews.setSelected( BaseUtils.getPropertyBoolean( "loadNews" ) );
+		fullscreen.setSelected( BaseUtils.getPropertyBoolean( "playMusic" ) );
 	}
 }

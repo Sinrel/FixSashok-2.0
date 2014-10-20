@@ -14,10 +14,10 @@ import java.util.ArrayList;
 import java.util.Formatter;
 import java.util.List;
 
+import javafx.scene.control.Label;
+
 import org.sinrel.fixsashok.Settings;
-
-import net.launcher.components.Frame;
-
+import org.sinrel.fixsashok.ui.views.Scenes;
 
 public class GuardUtils
 {
@@ -82,7 +82,8 @@ public class GuardUtils
 			GuardUtils.updateMods(answer);
 			if(ret && action)
 			{
-				Frame.main.setError("Ошибка вторичной проверки кеша.");
+				( (Label) Scenes.getInstance().getMainScene().lookup("#messageError") ).setText("Ошибка вторичной проверки кеша.");
+				
 				return;
 			} else if(ret && !action)
 			{

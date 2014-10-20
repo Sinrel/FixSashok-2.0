@@ -9,7 +9,7 @@ public class Settings {
 	
 	public static final String newsLink = ""; //Адрес страницы новостей. Пример: http://google.com/
 	public static final boolean playMusic = true;
-	public static final double musicVolume = 0.2; //Громкость звука. (от 0 до 1)
+	public static final double musicVolume = 0.05; //Громкость звука. (от 0 до 1)
 	
 	public static final String masterVersion     = "2.0"; //Версия лаунчера
 	public static final byte versionCode = 2;//Код версии
@@ -47,6 +47,7 @@ public class Settings {
 	public static final String key2              = "1234567891234567"; //16 Character Key Ключ пост запросов
 
 	public static boolean debug		 	         =  true; //Отображать все действия лаунчера (отладка)(true/false)
+	public static boolean patchDir 		         =  true; //Использовать автоматическую замену директории игры (true/false)
 	
 	public static String[] servers =
 	{

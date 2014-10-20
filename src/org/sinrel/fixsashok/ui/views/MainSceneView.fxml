@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.web.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.paint.*?>
@@ -48,10 +50,6 @@
             <Font name="Tahoma" size="16.0" />
          </font>
       </PasswordField>
-      <WebView id="newsBrowser" fx:id="newsBrowser" focusTraversable="false" layoutY="30.0" prefHeight="369.0" prefWidth="850.0">
-         <effect>
-            <Blend mode="LIGHTEN" />
-         </effect></WebView>
       <Hyperlink id="secondLink" fx:id="secondLink" focusTraversable="false" layoutX="630.0" layoutY="408.0" onAction="#onSecondLinkAction" text="%secondLink.text" textFill="WHITE">
          <font>
             <Font name="Tahoma" size="16.0" />
@@ -69,5 +67,27 @@
       </CheckBox>
       <ChoiceBox id="servers" fx:id="servers" focusTraversable="false" layoutX="215.0" layoutY="480.0" prefHeight="24.0" prefWidth="195.0" />
       <Label id="serverStatus" fx:id="serverStatus" layoutX="420.0" layoutY="485.0" />
+      <Label id="messageString" fx:id="messageString" layoutX="609.0" layoutY="486.0" textFill="RED">
+         <font>
+            <Font name="Tahoma" size="16.0" />
+         </font>
+      </Label>
+      <WebView id="newsBrowser" fx:id="newsBrowser" focusTraversable="false" layoutY="30.0" prefHeight="369.0" prefWidth="850.0">
+         <effect>
+            <Blend mode="LIGHTEN" />
+         </effect></WebView>
+      <ImageView id="loadingIcon" fx:id="loadingIcon" fitHeight="124.0" fitWidth="124.0" layoutX="363.0" layoutY="153.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/loading.gif" />
+         </image>
+         <viewport>
+            <Rectangle2D />
+         </viewport>
+      </ImageView>
+      <Label id="loadingDesc" fx:id="loadingDesc" layoutX="287.0" layoutY="286.0" text="Неправильный логин или пароль" textFill="RED">
+         <font>
+            <Font name="Tahoma" size="18.0" />
+         </font>
+      </Label>
    </children>
 </Pane>

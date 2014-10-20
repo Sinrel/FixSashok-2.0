@@ -1,5 +1,5 @@
 #mainSceneRoot {
-	-fx-background-color: transparent; 
+    -fx-background-color: transparent;
 	-fx-background-repeat: no-repeat;
 	-fx-background-position: center;
 	-fx-background-image: url("../images/background.png");
@@ -8,27 +8,19 @@
 #dragger {}
 
 #savePassword>.box {
-  -fx-background-insets: 0;
-  -fx-background-radius: 0;
   -fx-background-color: transparent;
 }
 
 #savePassword>.box>.mark {
-  -fx-background-image: url("../images/checkboxes/checkbox.png");
+  -fx-background-image: url("../images/checkbox/checkbox.png");
   -fx-background-position: center;
   -fx-background-repeat: stretch;
 }
 
 #savePassword:selected>.box>.mark{
   -fx-background-color: transparent;
-  -fx-background-image: url("../images/checkboxes/checkboxTrue.png");
+  -fx-background-image: url("../images/checkbox/checkboxTrue.png");
 }
-
-/*
-selected
-determinate
-indeterminate
-*/
 
 #loginField {
 	-fx-background-color: transparent;
@@ -94,9 +86,7 @@ indeterminate
 	-fx-background-image: url("../images/draggbuttons/hideWindowActive.png");
 }
 
-#firstLink:visited {
-	color: #fff;	
-}
+#firstLink:visited {}
 
 #firstLink:visited {
 	
@@ -151,5 +141,9 @@ indeterminate
 }
 
 #newsBrowser {
-	fx-background-color: transparent;
+	-fx-background-color: transparent;
+}
+
+#loadingIcon {
+	-fx-background-color: transparent;
 }

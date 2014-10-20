@@ -12,7 +12,7 @@ public class Translator {
 	
 	private static Translator instance;
 	
-	public Translator() {
+	private Translator() {
 		current = ru;
 	}
 	

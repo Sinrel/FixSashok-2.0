@@ -9,9 +9,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.List;
 
-import net.y;
-import net.launcher.components.Frame;
-import net.launcher.components.PersonalContainer;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 import javax.crypto.Cipher;
@@ -19,36 +18,43 @@ import javax.crypto.spec.SecretKeySpec;
 
 import org.sinrel.fixsashok.FixSashok;
 import org.sinrel.fixsashok.Settings;
+import org.sinrel.fixsashok.ui.views.Scenes;
 
-public class ThreadUtils
-{
+public class ThreadUtils {
+	
 	public static UpdaterThread updaterThread;
 	public static Thread serverPollThread;
 	static String d = y.e()+"1234";
-
-	static String token =  new String(Frame.password.getPassword());
 	
-	public static void auth(final boolean personal)
-	{
-		BaseUtils.send("Logging in, login: " + (TextField) FixSashok.getInstance().MAIN_SCENE.lookup("#loginField"));
+	static String token =  ( (PasswordField) Scenes.getInstance().getMainScene().lookup("#passwordField") ).getText();
+	
+	private static PasswordField passwordField = ( (PasswordField) Scenes.getInstance().getMainScene().lookup("#passwordField") );
+	private static TextField loginField = (PasswordField) Scenes.getInstance().getMainScene().lookup("#loginField");
+	
+	private static Label messageString = (Label) Scenes.getInstance().getMainScene().lookup("#messageString");
+	
+	public static void auth(final boolean personal) {
+		
+		BaseUtils.send("Logging in, login: " + loginField.getText() );
 		Thread t = new Thread() {
 		public void run()
 		{ try {
 			
 			boolean error = false;
-			token =  new String(Frame.password.getPassword());
+			token =  passwordField.getText();
+			
 			if(Frame.token.equals("token"))
 			{
 				try {
 				token =  decrypt(getPropertyString("password"), d);
 				} catch (Exception e) {
-					Frame.main.panel.tmpString = "Ошибка подключения";
+					messageString.setText( "Ошибка подключения" );
 					error = true;
 				}
 			}
 			String answer2 = BaseUtils.execute(BaseUtils.buildUrl("launcher.php"), new Object[]
 			{
-				"action", encrypt("auth:"+BaseUtils.getClientName()+":"+Frame.login.getText()+":"+token+":"+GuardUtils.hash(ThreadUtils.class.getProtectionDomain().getCodeSource().getLocation().toURI().toURL())+":"+Frame.token, Settings.key2),
+				"action", encrypt("auth:"+BaseUtils.getClientName()+":"+loginField.getText()+":"+token+":"+GuardUtils.hash(ThreadUtils.class.getProtectionDomain().getCodeSource().getLocation().toURI().toURL())+":"+Frame.token, Settings.key2),
 			});
 			BaseUtils.send(answer2);
             String answer = null;
@@ -57,7 +63,7 @@ public class ThreadUtils
 			} catch (Exception e) {}
 			if(answer == null)
 			{
-				Frame.main.panel.tmpString = "Ошибка подключения";
+				messageString.setText( "Ошибка подключения" );
 				error = true;
 			} else if(answer.contains("badlauncher<$>"))
 			{
@@ -65,31 +71,31 @@ public class ThreadUtils
 				return;
 			} else if(answer.contains("errorLogin<$>"))
 			{
-				Frame.main.panel.tmpString = "Ошибка авторизации (Логин, пароль)";
+				messageString.setText( "Ошибка авторизации (Логин, пароль)" );
 				error = true;
 			} else if(answer.contains("errorsql<$>"))
 			{
-				Frame.main.panel.tmpString = "Ошибка sql";
+				messageString.setText( "Ошибка sql" );
 				error = true;
 			} else if(answer.contains("client<$>"))
 			{
-				Frame.main.panel.tmpString = "Ошибка: "+answer.replace("client<$>", "клиент")+" не найден";
+				messageString.setText( "Ошибка: "+answer.replace("client<$>", "клиент")+" не найден" );
 				error = true;
 			} else if(answer.contains("temp<$>"))
 			{
-				Frame.main.panel.tmpString = "Подождите, перед следущей попыткой ввода (Логин Пароль)";
+				messageString.setText( "Подождите, перед следущей попыткой ввода (Логин Пароль)" );
 				error = true;	
 			} else if(answer.contains("badhash<$>"))
 			{
-				Frame.main.panel.tmpString = "Ошибка: Неподдерживаемый способ хеширования";
+				messageString.setText( "Ошибка: Неподдерживаемый способ хеширования" );
 				error = true;	
 			} else if(answer.split("<br>").length != 4)
 			{
-				Frame.main.panel.tmpString = answer;
+				messageString.setText( answer );
 				error = true;
 			} if(error)
 			{
-				Frame.main.panel.tmpColor = Color.red;
+				messageString.setStyle("-fx-text-fill: red");
 				try
 				{
 					sleep(2000);
@@ -106,90 +112,9 @@ public class ThreadUtils
 			}
 			BaseUtils.send("Logging in successful");
 			
-				if(personal)
-				{
-					Frame.main.panel.tmpString = "Загрузка данных...";
-					String personal = BaseUtils.execute(BaseUtils.buildUrl("launcher.php"), new Object[]
-					{
-						"action", encrypt("getpersonal:0:"+Frame.login.getText()+":"+token, Settings.key2),
-					});
-					
-                    if(personal.contains("=="))
-					{
-						personal = decrypt(personal, Settings.key1);
-					}
-
-					if(personal == null)
-					{
-						Frame.main.panel.tmpString = "Ошибка подключения";
-						error = true;
-					} else if(personal.contains("errorLogin"))
-					{
-						Frame.main.panel.tmpString = "Ошибка авторизации (Логин, пароль)";
-						error = true;
-					} else if(personal.contains("errorsql"))
-					{
-						Frame.main.panel.tmpString = "Ошибка sql";
-						error = true;
-					} else if(personal.contains("temp"))
-					{
-						Frame.main.panel.tmpString = "Подождите, перед следущей попыткой ввода (Логин Пароль)";
-						error = true;
-					} else if(personal.contains("noactive"))
-					{
-						Frame.main.panel.tmpString = "Ваш аккаунт не активирован!";
-						error = true;	
-					} else if(personal.contains("badhash"))
-					{
-						Frame.main.panel.tmpString = "Ошибка: Неподдерживаемый способ шифровки";
-						error = true;	
-					} else if(personal.split("<:>").length != 13 || personal.split("<:>")[0].length() != 7)
-					{
-						Frame.main.panel.tmpString = personal;
-						error = true;
-					} if(error)
-					{
-						Frame.main.panel.tmpColor = Color.red;
-						try
-						{
-							sleep(2000);
-						} catch (InterruptedException e) {}
-						Frame.main.setAuthComp();
-						return;
-					} else
-					{
-						try {
-						Frame.main.panel.tmpString = "Загрузка скина...";
-						BufferedImage skinImage   = BaseUtils.getSkinImage(answer.split("<br>")[1].split("<:>")[0]);
-						Frame.main.panel.tmpString = "Загрузка плаща...";
-						BufferedImage cloakImage  = BaseUtils.getCloakImage(answer.split("<br>")[1].split("<:>")[0]);
-						Frame.main.panel.tmpString = "Парсинг скина...";
-						skinImage = ImageUtils.parseSkin(skinImage);
-						Frame.main.panel.tmpString = "Парсинг плаща...";
-						cloakImage= ImageUtils.parseCloak(cloakImage);
-						Frame.main.panel.tmpString = BaseUtils.empty;
-						PersonalContainer pc = new PersonalContainer(personal.split("<:>"), skinImage, cloakImage);
-						Frame.main.setPersonal(pc);
-						
-						return;
-						} catch(Exception e){ BaseUtils.throwException(e, Frame.main); return; }
-					}
-				}
-
+				
 				setProperty("password", encrypt(answer.split("<br>")[2].split("<br>")[0], d).replaceAll("\n|\r\n", ""));
-				if(Frame.token.equals("null"))
-				{
-					Frame.password.setVisible(false);
-					Frame.toGame.setVisible(true);
-					Frame.toPersonal.setVisible(Settings.usePersonal && true);
-					Frame.toAuth.setVisible(false);
-					Frame.toLogout.setVisible(true);
-					Frame.toRegister.setVisible(false);
-					Frame.token = "token";
-					Frame.login.setEditable(false);
-					Frame.main.setAuthComp();
-					return;
-				}
+				
 				runUpdater(answer);
 			} interrupt(); } catch(Exception e){ e.printStackTrace(); }
 		}};

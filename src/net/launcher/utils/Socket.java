@@ -1,4 +1,4 @@
-package net.launcher.components;
+package net.launcher.utils;
 
 import java.io.IOException;
 import java.net.ServerSocket;

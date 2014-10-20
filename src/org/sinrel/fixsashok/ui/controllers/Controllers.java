@@ -1,6 +1,7 @@
 package org.sinrel.fixsashok.ui.controllers;
 
 import java.io.IOException;
+import java.util.ResourceBundle;
 
 import org.sinrel.fixsashok.localization.Translator;
 
@@ -25,21 +26,25 @@ public class Controllers {
         return instance;
     }
     
-    @SuppressWarnings("static-access")
 	private Controllers() throws IOException {
-    	FXMLLoader loader = new FXMLLoader();
-    	
-    	loader.load( getClass().getResource("../views/MainSceneView.fxml"), Translator.getInstance().getCurrentLang() );
-		mainController = (MainSceneController) loader.getController();
+		FXMLLoader loader;
+		ResourceBundle lang = Translator.getInstance().getCurrentLang();
 		
-		loader.load( getClass().getResource("../views/OptionsSceneView.fxml"), Translator.getInstance().getCurrentLang());
-		optionsController = (OptionsSceneController) loader.getController();
-
-		loader.load( getClass().getResource("../views/DownloadSceneView.fxml"), Translator.getInstance().getCurrentLang() );
-		downloadController = (DownloadSceneController) loader.getController();
-		
-		loader.load( getClass().getResource("../views/DialogSceneView.fxml"), Translator.getInstance().getCurrentLang() );
-		dialogController = (DialogSceneController) loader.getController();
+    	loader = new FXMLLoader( getClass().getResource("../views/MainSceneView.fxml"), lang );	
+    	loader.load();
+		mainController = loader.getController();
+		//
+		loader = new FXMLLoader( getClass().getResource("../views/OptionsSceneView.fxml"), lang );
+		loader.load();
+		optionsController = loader.getController();
+		//
+		loader = new FXMLLoader( getClass().getResource("../views/DownloadSceneView.fxml"), lang );
+		loader.load();
+		downloadController = loader.getController();
+		//
+		loader = new FXMLLoader( getClass().getResource("../views/DialogSceneView.fxml"), lang );
+		loader.load();
+		dialogController = loader.getController();
     }
     
     public MainSceneController getMainController() {

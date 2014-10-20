@@ -11,25 +11,28 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.net.HttpURLConnection;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.URI;
 import java.net.URL;
-
+import java.net.URLClassLoader;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+
+import javafx.scene.control.ChoiceBox;
 
 import javax.imageio.ImageIO;
 
 import org.sinrel.fixsashok.FixSashok;
 import org.sinrel.fixsashok.Settings;
 import org.sinrel.fixsashok.Starter;
-
-import net.launcher.components.Frame;
+import org.sinrel.fixsashok.ui.views.Scenes;
 
 public class BaseUtils
 {
@@ -40,11 +43,15 @@ public class BaseUtils
 
 	public static Map<String, Font> fonts = new HashMap<String, Font>();
 	public static Map<String, BufferedImage> imgs = new HashMap<String, BufferedImage>();
-		
+	
+	public static boolean isNumeric( String s ) {  
+	    return s.matches("[-+]?\\d*\\.?\\d+");  
+	} 
+	
 	public static boolean isDublicated() {
 	    try {
 	          ServerSocket socket = new ServerSocket(65534);
-	          net.launcher.components.Socket soc = new net.launcher.components.Socket(socket);
+	          net.launcher.utils.Socket soc = new net.launcher.utils.Socket(socket);
 	          soc.start();
 	          
 	          return false;
@@ -309,13 +316,13 @@ public class BaseUtils
         return "http://" + Settings.domain + path;
     }
 
-	public static String getClientName()
-	{
-		if(Settings.useMulticlient)
-		{
-			return Frame.main.servers.getSelected().replaceAll(" ", empty);
-		}
-		return "main";
+	@SuppressWarnings("unchecked")
+	public static String getClientName() {
+		if(!Settings.useMulticlient) return "main";
+		
+		ChoiceBox<String> servers = (ChoiceBox<String>) Scenes.getInstance().getMainScene().lookup("servers");
+		return servers.getSelectionModel().getSelectedItem();
+		
 	}
 
 	public static void openURL(String url)
@@ -360,36 +367,6 @@ public class BaseUtils
 		} catch(Exception e)
 		{
 			sendErr("Stream for " + surl + " not ensablished, return null");
-			return null;
-		}
-	}
-
-	public static Font getFont(String name, float size)
-	{
-		try
-		{
-			if(fonts.containsKey(name)) return (Font)fonts.get(name).deriveFont(size);
-			Font font = null;
-			send("Creating font: " + name);
-			try
-			{
-				font = Font.createFont(Font.TRUETYPE_FONT, BaseUtils.class.getResourceAsStream("/net/launcher/theme/" + name + ".ttf"));
-			} catch(Exception e)
-			{
-				try
-				{
-					font = Font.createFont(Font.TRUETYPE_FONT, BaseUtils.class.getResourceAsStream("/net/launcher/theme/" + name + ".otf"));
-				} catch(Exception e1)
-				{
-					e1.printStackTrace();
-				}
-			}
-			fonts.put(name, font);
-			return font.deriveFont(size);
-		} catch(Exception e)
-		{
-			send("Failed create font!");
-			throwException(e, Frame.main);
 			return null;
 		}
 	}
@@ -554,6 +531,34 @@ public class BaseUtils
 	    {
 	    	file.delete();
 	    }
+	}
+	
+    /**
+     * @author D_ART
+     * 
+     * @param cl URLClassLoader
+     */
+	public static void patchDir( URLClassLoader cl ) {
+		if(!Settings.patchDir) return;
+		
+		try {
+			Class< ? > c = cl.loadClass( "net.minecraft.client.Minecraft" );
+
+			send("Changing client dir...");
+			
+			for ( Field f : c.getDeclaredFields() ) {       
+				if( f.getType().getName().equals( "java.io.File" ) & Modifier.isPrivate( f.getModifiers() ) 
+						& Modifier.isStatic( f.getModifiers() )) 
+				{
+					f.setAccessible( true );
+					f.set( null, getMcDir() );
+		            send("Patching succesful, herobrine removed.");
+		            return;
+				}
+			}
+		}catch ( Exception e ) {
+			sendErr( "Client not patched" );
+		}
 	}
 
 }

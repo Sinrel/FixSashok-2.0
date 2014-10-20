@@ -1,8 +1,95 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1">
-	<!-- TODO Add Nodes -->
-</AnchorPane>
-
+<Pane id="mainSceneRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.sinrel.fixsashok.ui.controllers.DownloadSceneController">
+   <children>
+      <Pane id="dragger" fx:id="dragger" onMouseDragged="#onMouseDraggedEvent" onMousePressed="#onMousePressedEvent" prefHeight="30.0" prefWidth="850.0">
+         <children>
+            <Button id="closeButton" fx:id="closeButton" layoutX="810.0" layoutY="2.0" mnemonicParsing="false" onAction="#closeWindow" prefHeight="24.0" prefWidth="35.0" />
+            <Button id="hideButton" fx:id="hideButton" layoutX="770.0" layoutY="2.0" mnemonicParsing="false" onAction="#hideWindow" prefHeight="24.0" prefWidth="35.0" />
+            <Label id="windowTitle" fx:id="windowTitle" layoutX="10.0" layoutY="5.0" text="%window.title" textFill="WHITE">
+               <font>
+                  <Font name="Tahoma" size="16.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <ProgressBar id="progressBar" fx:id="progressBar" layoutX="23.0" layoutY="453.0" prefHeight="36.0" prefWidth="805.0" progress="0.0" />
+      <Label id="currentFileValue" fx:id="currentFileValue" layoutX="163.0" layoutY="170.0" text="%download.currentFile.value" textFill="WHITE">
+         <font>
+            <Font name="Tahoma" size="16.0" />
+         </font>
+      </Label>
+      <Label id="folder" fx:id="folder" layoutX="38.0" layoutY="258.0" text="%download.folder" textFill="WHITE">
+         <font>
+            <Font name="Tahoma" size="16.0" />
+         </font>
+      </Label>
+      <Label id="total" fx:id="total" layoutX="40.0" layoutY="193.0" text="%download.total" textFill="WHITE">
+         <font>
+            <Font name="Tahoma" size="16.0" />
+         </font>
+      </Label>
+      <Label id="left" fx:id="left" layoutX="38.0" layoutY="301.0" text="%download.left" textFill="WHITE">
+         <font>
+            <Font name="Tahoma" size="16.0" />
+         </font>
+      </Label>
+      <Label id="status" fx:id="status" layoutX="38.0" layoutY="279.0" text="%download.status" textFill="WHITE">
+         <font>
+            <Font name="Tahoma" size="16.0" />
+         </font>
+      </Label>
+      <Label id="loaded" fx:id="loaded" layoutX="40.0" layoutY="214.0" text="%download.loaded" textFill="WHITE">
+         <font>
+            <Font name="Tahoma" size="16.0" />
+         </font>
+      </Label>
+      <Label id="speed" fx:id="speed" layoutX="39.0" layoutY="236.0" text="%download.speed" textFill="WHITE">
+         <font>
+            <Font name="Tahoma" size="16.0" />
+         </font>
+      </Label>
+      <Label id="currentFile" fx:id="currentFile" layoutX="40.0" layoutY="170.0" text="%download.currentFile" textFill="WHITE">
+         <font>
+            <Font name="Tahoma" size="16.0" />
+         </font>
+      </Label>
+      <Label id="totalValue" fx:id="totalValue" layoutX="97.0" layoutY="193.0" text="%download.total.value" textFill="WHITE">
+         <font>
+            <Font name="Tahoma" size="16.0" />
+         </font>
+      </Label>
+      <Label id="loadedValue" fx:id="loadedValue" layoutX="134.0" layoutY="214.0" text="%download.loaded.value" textFill="WHITE">
+         <font>
+            <Font name="Tahoma" size="16.0" />
+         </font>
+      </Label>
+      <Label id="speedValue" fx:id="speedValue" layoutX="117.0" layoutY="236.0" text="%download.speed.value" textFill="WHITE">
+         <font>
+            <Font name="Tahoma" size="16.0" />
+         </font>
+      </Label>
+      <Label id="folderValue" fx:id="folderValue" layoutX="98.0" layoutY="258.0" text="%download.folder.value" textFill="WHITE">
+         <font>
+            <Font name="Tahoma" size="16.0" />
+         </font>
+      </Label>
+      <Label id="statusValue" fx:id="statusValue" layoutX="134.0" layoutY="279.0" text="%download.status.value" textFill="WHITE">
+         <font>
+            <Font name="Tahoma" size="16.0" />
+         </font>
+      </Label>
+      <Label id="left" fx:id="leftValue" layoutX="126.0" layoutY="301.0" text="%download.left.value" textFill="WHITE">
+         <font>
+            <Font name="Tahoma" size="16.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>

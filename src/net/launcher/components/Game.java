@@ -14,16 +14,22 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.stage.Stage;
+import javafx.scene.control.ChoiceBox;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
+import org.sinrel.fixsashok.FixSashok;
 import org.sinrel.fixsashok.Settings;
+import org.sinrel.fixsashok.ui.views.Scenes;
 
 import net.minecraft.Launcher;
 import net.launcher.utils.BaseUtils;
 import net.launcher.utils.EncodingUtils;
 import net.launcher.utils.GuardUtils;
+import net.launcher.utils.NulledStream;
 import net.launcher.utils.java.eURLClassLoader;
 
 public class Game extends JFrame {
@@ -37,6 +43,9 @@ public class Game extends JFrame {
 	
 	public Game(final String answer)
 	{
+		@SuppressWarnings("unchecked")
+		int server = ( (ChoiceBox<String>)  ( Scenes.getInstance().getMainScene().lookup("#servers") ) ).getSelectionModel().getSelectedIndex();
+		
 		GuardUtils.getLogs(new File(BaseUtils.getAssetsDir().getAbsolutePath()+File.separator+BaseUtils.getClientName()));
 		String bin = BaseUtils.getMcDir().toString() + File.separator + "bin" + File.separator;	
 		cl = new eURLClassLoader(GuardUtils.url.toArray(new URL[GuardUtils.url.size()]));
@@ -92,16 +101,19 @@ public class Game extends JFrame {
 				mcapplet.customParameters.put("stand-alone", "true");
 				if(Settings.useAutoenter)
 				{
-					mcapplet.customParameters.put("server", Settings.servers[Frame.main.servers.getSelectedIndex()].split(", ")[1]);
-					mcapplet.customParameters.put("port", Settings.servers[Frame.main.servers.getSelectedIndex()].split(", ")[2]);
+					mcapplet.customParameters.put("server", Settings.servers[server].split(", ")[1]);
+					mcapplet.customParameters.put("port", Settings.servers[server].split(", ")[2]);
 				}
 				setTitle(Settings.titleInGame);
-				if(Frame.main != null)
+				
+				Stage stage = FixSashok.getInstance().stage;
+				if( stage != null)
 				{
-					Frame.main.setVisible(false);
-					setBounds(Frame.main.getBounds());
-					setExtendedState(Frame.main.getExtendedState());
-					setMinimumSize(Frame.main.getMinimumSize());
+					stage.hide();
+					setSize( (int) stage.getWidth(), (int) stage.getHeight() );
+					
+					setExtendedState( JFrame.MAXIMIZED_BOTH );
+					setMinimumSize( new Dimension( (int) stage.getWidth(), (int) stage.getHeight() ) );
 				}
 				setSize(Settings.width, Settings.height+28);
 				setMinimumSize(new Dimension(Settings.width, Settings.height+28));
@@ -171,11 +183,11 @@ public class Game extends JFrame {
 					params.add("--height");
 					params.add(String.valueOf(Settings.height));
 				}	
-				if(Settings.useAutoenter) {
+				if(Settings.useAutoenter) {	
 					params.add("--server");
-					params.add(Settings.servers[Frame.main.servers.getSelectedIndex()].split(", ")[1]);
+					params.add(Settings.servers[server].split(", ")[1]);
 					params.add("--port");
-					params.add(Settings.servers[Frame.main.servers.getSelectedIndex()].split(", ")[2]);
+					params.add(Settings.servers[server].split(", ")[2]);
 				}		
 				try {
 					cl.loadClass("com.mojang.authlib.Agent");
@@ -186,7 +198,7 @@ public class Game extends JFrame {
 					params.add("--userProperties");
 					params.add("{}");
 					params.add("--assetIndex");
-					params.add(Settings.servers[Frame.main.servers.getSelectedIndex()].split(", ")[3]);
+					params.add(Settings.servers[server].split(", ")[3]);
 				} catch (ClassNotFoundException e2) {
 					params.add("--session");
 					params.add(session);
@@ -194,11 +206,11 @@ public class Game extends JFrame {
 				params.add("--username");
 				params.add(user);
 				params.add("--version");
-				params.add(Settings.servers[Frame.main.servers.getSelectedIndex()].split(", ")[3]);
+				params.add(Settings.servers[server].split(", ")[3]);
 				params.add("--gameDir");
 				params.add(minpath);
 				params.add("--assetsDir");
-				if(Integer.parseInt(Settings.servers[Frame.main.servers.getSelectedIndex()].split(", ")[3].replace(".", "")) < 173)
+				if(Integer.parseInt(Settings.servers[server].split(", ")[3].replace(".", "")) < 173)
 				{
 					params.add(assets+"assets/virtual/legacy");
 				} else {
@@ -224,7 +236,7 @@ public class Game extends JFrame {
 					Class = "net.minecraft.client.main.Main";
 				}
 				
-                Frame.main.setVisible(false);
+                FixSashok.getInstance().stage.hide();
 				try
 				{
 					Class<?> start = cl.loadClass(Class);
@@ -232,7 +244,8 @@ public class Game extends JFrame {
 					main.invoke(null, new Object[] { params.toArray(new String[0]) });
 				} catch (Exception e)
 				{
-					JOptionPane.showMessageDialog(Frame.main, e, "Ошибка запуска", javax.swing.JOptionPane.ERROR_MESSAGE, null);
+					FixSashok.getInstance().stage.hide();
+					JOptionPane.showMessageDialog(null, e, "Ошибка запуска", javax.swing.JOptionPane.ERROR_MESSAGE, null);
 					System.exit(0);
 				}
 			} catch (Exception e) {}

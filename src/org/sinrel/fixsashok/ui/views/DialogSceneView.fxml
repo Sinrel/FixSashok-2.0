@@ -1,8 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml/1">
-	<!-- TODO Add Nodes -->
-</BorderPane>
-
+<Pane id="root" fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="850.0" stylesheets="@../styles/DialogSceneStyle.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label id="dialogTitle" fx:id="dialogTitle" layoutX="335.0" layoutY="130.0" text="Доступно обновление" textFill="WHITE">
+         <font>
+            <Font name="Tahoma" size="18.0" />
+         </font>
+      </Label>
+      <TextArea id="dialogDescription" fx:id="dialogDescription" editable="false" focusTraversable="false" layoutX="185.0" layoutY="175.0" prefHeight="240.0" prefWidth="485.0" text="Для продолжения игры обновите лаунчер.&#10;&#10;Новый лаунчер содержит разные улучшения и исправления, а так же необходим для запуска игры. &#10;Нажмите &quot;Обновить&quot;, чтобы скачать новую версию. &#10;&#10;Если же вы не можете обновить&#10;лаунчер прямо сейчас, нажмите кнопку &quot;Выход&quot;.&#10;&#10;Текущая версия: {currentVersion}&#10;Новая версия: {newVersion}" wrapText="true">
+         <font>
+            <Font name="Tahoma" size="16.0" />
+         </font>
+      </TextArea>
+      <Button layoutX="87.0" layoutY="438.0" mnemonicParsing="false" text="%updateDialog.cancelUpdate.text" textFill="WHITE">
+         <font>
+            <Font name="Tahoma" size="16.0" />
+         </font>
+      </Button>
+      <Button layoutX="343.0" layoutY="445.0" mnemonicParsing="false" text="Button" />
+   </children>
+</Pane>

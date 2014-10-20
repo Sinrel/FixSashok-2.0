@@ -8,8 +8,6 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.sinrel.fixsashok.Settings;
-
 import net.launcher.utils.BaseUtils;
 import net.launcher.utils.java.eURLClassLoader;
 
@@ -36,16 +34,7 @@ public class Launcher extends Applet implements AppletStub
 			mcApplet.init();
 			return;
 		}
-
-
-		new Runnable()
-		{
-			public void run()
-			{
-				Settings.onStartMinecraft();
-			}
-		}.run();
-
+		
 		eURLClassLoader cl = new eURLClassLoader(urls);
 		System.setProperty("org.lwjgl.librarypath", bin + "natives");
 		System.setProperty("net.java.games.input.librarypath", bin + "natives");

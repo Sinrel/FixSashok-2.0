@@ -37,8 +37,12 @@ public class Scenes {
 		downloadScene.setFill( Color.TRANSPARENT );
 	}
 	
-	public static Scenes getInstance() throws IOException {
-		if( instance == null ) instance = new Scenes();
+	public static Scenes getInstance() {
+		try {
+			if( instance == null ) instance = new Scenes();
+		}catch( Exception e ) {
+			e.printStackTrace();
+		}
 		return instance;
 	}
 	

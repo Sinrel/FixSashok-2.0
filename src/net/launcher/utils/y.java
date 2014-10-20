@@ -1,4 +1,4 @@
-package net;
+package net.launcher.utils;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;

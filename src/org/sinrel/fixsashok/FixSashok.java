@@ -1,8 +1,6 @@
 package org.sinrel.fixsashok;
 
-import org.sinrel.fixsashok.localization.Translator;
 import org.sinrel.fixsashok.ui.audio.MusicUtils;
-import org.sinrel.fixsashok.ui.controllers.Controllers;
 import org.sinrel.fixsashok.ui.views.Scenes;
 
 import net.launcher.utils.BaseUtils;
@@ -13,7 +11,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
@@ -26,8 +23,7 @@ public class FixSashok extends Application {
 	public Scene startupErrorScene;
 	
 	public Stage stage;
-	private Scenes scenes;
-	
+
 	private static FixSashok instance;
 	
 	public static FixSashok getInstance() {
@@ -88,27 +84,6 @@ public class FixSashok extends Application {
 			shutdown();
 		}
 	}
-	
-	/*
-	private void loadViews() throws IOException {
-		//Loading views
-		MAIN_SCENE = new Scene( (Parent) FXMLLoader.load( getClass().getResource("ui/views/MainSceneView.fxml"), translator.getCurrentLang() ) );
-		OPTIONS_SCENE = new Scene( (Parent) FXMLLoader.load( getClass().getResource("ui/views/OptionsSceneView.fxml"), translator.getCurrentLang() ) );
-		PROCESS_SCENE = new Scene( (Parent) FXMLLoader.load( getClass().getResource("ui/views/ProcessSceneView.fxml"), translator.getCurrentLang() ) );
-		DOWNLOAD_SCENE = new Scene( (Parent) FXMLLoader.load( getClass().getResource("ui/views/DownloadSceneView.fxml"), translator.getCurrentLang() ) );
-		//Loading stylesheets
-		MAIN_SCENE.getStylesheets().add( FixSashok.class.getResource("ui/styles/MainSceneStyle.css").toExternalForm() );
-		OPTIONS_SCENE.getStylesheets().add( FixSashok.class.getResource("ui/styles/OptionsSceneStyle.css").toExternalForm() );
-		PROCESS_SCENE.getStylesheets().add( FixSashok.class.getResource("ui/styles/ProcessSceneStyle.css").toExternalForm() );
-		DOWNLOAD_SCENE.getStylesheets().add( FixSashok.class.getResource("ui/styles/DownloadSceneStyle.css").toExternalForm() );
-		//
-		MAIN_SCENE.setFill( Color.TRANSPARENT );
-		OPTIONS_SCENE.setFill( Color.TRANSPARENT );
-		PROCESS_SCENE.setFill( Color.TRANSPARENT );
-		DOWNLOAD_SCENE.setFill( Color.TRANSPARENT );
-		//DIALOG_SCENE.setFill( Color.TRANSPARENT );
-	}
-	*/
 	
 	public void shutdown() {
 		if( Settings.playMusic ) MusicUtils.playShutdownSound();

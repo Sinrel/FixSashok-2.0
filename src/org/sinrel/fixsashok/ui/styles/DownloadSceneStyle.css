@@ -5,3 +5,53 @@
 	-fx-background-image: url("../images/backgroundDownload.png");
 
 }
+
+#dragger {}
+
+#closeButton {
+	-fx-background-color: transparent;
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: center;
+	-fx-background-size: 100%;
+	-fx-background-image: url("../images/draggbuttons/closeWindow.png");
+}
+
+#closeButton:hover {
+	-fx-background-size: 100%;
+	-fx-background-color: transparent;
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: center;
+	-fx-background-image: url("../images/draggbuttons/closeWindowHover.png");
+}
+
+#closeButton:active {
+	-fx-background-size: 100%;
+	-fx-background-color: transparent;
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: center;
+	-fx-background-image: url("../images/draggbuttons/closeWindowActive.png");
+}
+
+#hideButton {
+	-fx-background-size: 100%;
+	-fx-background-color: transparent;
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: center;
+	-fx-background-image: url("../images/draggbuttons/hideWindow.png");
+}
+
+#hideButton:hover {
+	-fx-background-size: 100%;
+	-fx-background-color: transparent;
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: center;
+	-fx-background-image: url("../images/draggbuttons/hideWindowHover.png");
+}
+
+#hideButton:active {
+	-fx-background-size: 100%;
+	-fx-background-color: transparent;
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: center;
+	-fx-background-image: url("../images/draggbuttons/hideWindowActive.png");
+}
